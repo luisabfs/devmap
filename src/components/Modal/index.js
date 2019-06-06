@@ -1,9 +1,27 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as DevActions } from "../../store/ducks/devs";
+
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-export default class CustomModal extends Component {
+class CustomModal extends Component {
+  state = {
+    input: ""
+  };
+
+  handleAddDev = e => {
+    e.preventDefault();
+
+    console.tron.log(this.state.input);
+
+    this.props.addDevRequest(this.state.input);
+
+    this.setState({ input: "" });
+  };
+
   render() {
     return (
       <Modal
@@ -18,14 +36,30 @@ export default class CustomModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form action="submit">
-            <input placeholder="Github username" />
+          <form onSubmit={this.handleAddDev}>
+            <input
+              type="text"
+              value={this.state.input}
+              onChange={e => this.setState({ input: e.target.value })}
+              placeholder="Github username"
+            />
+            <Button onClick={this.props.onHide} type="submit">
+              Add
+            </Button>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Add</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  devs: state.devs
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(DevActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CustomModal);
