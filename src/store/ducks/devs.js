@@ -22,6 +22,12 @@ export default function devs(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_REQUEST:
     case Types.ADD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: [...state.data, action.payload.data]
+      };
     case Types.ADD_FAILURE:
     default:
       return state;
@@ -31,9 +37,9 @@ export default function devs(state = INITIAL_STATE, action) {
  * Actions
  */
 export const Creators = {
-  addDevRequest: username => ({
+  addDevRequest: user => ({
     type: Types.ADD_REQUEST,
-    payload: { username }
+    payload: { user }
   }),
   addDevSuccess: data => ({
     type: Types.ADD_SUCCESS,

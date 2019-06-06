@@ -15,8 +15,6 @@ class CustomModal extends Component {
   handleAddDev = e => {
     e.preventDefault();
 
-    console.tron.log(this.state.input);
-
     this.props.addDevRequest(this.state.input);
 
     this.setState({ input: "" });
