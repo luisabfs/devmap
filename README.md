@@ -1,4 +1,4 @@
-# Github Compare
+# DevMap
 
 ## Main functionalities
 
