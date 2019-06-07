@@ -16,6 +16,10 @@ import "mapbox-gl/dist/mapbox-gl.css";
 class Main extends Component {
   state = {
     modalShow: false,
+    location: {
+      lat: 0,
+      lng: 0
+    },
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -45,10 +49,13 @@ class Main extends Component {
   };
 
   handleMapClick = e => {
-    // const [longitude, latitude] = e.lngLat;
+    const [longitude, latitude] = e.lngLat;
 
     // alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
-    this.setState({ modalShow: true });
+    this.setState({
+      modalShow: true,
+      location: { lat: latitude, lng: longitude }
+    });
   };
 
   notifySuccess = () => {
@@ -65,6 +72,7 @@ class Main extends Component {
         <CustomModal
           show={this.state.modalShow}
           onHide={() => this.setState({ modalShow: false })}
+          location={this.state.location}
         />
         <MapGL
           {...this.state.viewport}
@@ -74,24 +82,28 @@ class Main extends Component {
           onViewportChange={viewport => this.setState({ viewport })}
         >
           <Sidebar />
-          <Marker
-            latitude={-23.5439948}
-            longitude={-46.6065452}
-            onClick={this.handleMapClick}
-            captureClick={true}
-          >
-            <img
-              style={{
-                borderRadius: 100,
-                width: 48,
-                height: 48
-              }}
-              src="https://avatars0.githubusercontent.com/u/21061462?s=400&u=ace292debeb43c5a32c521ef0b0f9a094d9749e3&v=4"
-            />
-          </Marker>
-          {this.props.devs.error && this.notifyError()}
-          <ToastContainer key={3} />
+          {this.props.devs.data.map(dev => (
+            <Marker
+              key={dev.id}
+              latitude={dev.lat}
+              longitude={dev.lng}
+              onClick={this.handleMapClick}
+              captureClick={true}
+            >
+              <img
+                style={{
+                  borderRadius: 100,
+                  width: 48,
+                  height: 48
+                }}
+                src={dev.avatar}
+                alt="User avatar"
+              />
+            </Marker>
+          ))}
         </MapGL>
+        {this.props.devs.error && this.notifyError()}
+        <ToastContainer key={3} />
       </>
     );
   }

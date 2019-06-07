@@ -11,13 +11,17 @@ import Button from "react-bootstrap/Button";
 
 class CustomModal extends Component {
   state = {
-    input: ""
+    input: "",
+    location: {
+      lat: 0,
+      lng: 0
+    }
   };
 
   handleAddDev = e => {
     e.preventDefault();
 
-    this.props.addDevRequest(this.state.input);
+    this.props.addDevRequest(this.state.input, this.props.location);
 
     this.setState({ input: "" });
   };

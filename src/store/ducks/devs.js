@@ -43,9 +43,9 @@ export default function devs(state = INITIAL_STATE, action) {
  * Actions
  */
 export const Creators = {
-  addDevRequest: user => ({
+  addDevRequest: (user, location) => ({
     type: Types.ADD_REQUEST,
-    payload: { user }
+    payload: { user, location }
   }),
   addDevSuccess: data => ({
     type: Types.ADD_SUCCESS,
