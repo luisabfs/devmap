@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as DevActions } from "../../store/ducks/devs";
 
+import { Input } from "./styles";
+
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -35,7 +37,7 @@ class CustomModal extends Component {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={this.handleAddDev}>
-            <input
+            <Input
               type="text"
               value={this.state.input}
               onChange={e => this.setState({ input: e.target.value })}

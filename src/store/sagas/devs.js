@@ -9,6 +9,7 @@ export function* addDev(action) {
 
     const userData = {
       id: data.id,
+      username: data.login,
       name: data.name,
       avatar: data.avatar_url
     };

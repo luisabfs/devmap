@@ -11,7 +11,6 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex: 1;
 
   background: #fff;
@@ -28,4 +27,33 @@ export const Wrapper = styled.div`
     margin: 12px;
     border-bottom: 1px solid #ededed;
   }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      margin: 10px;
+      padding: 5px;
+
+      &:hover {
+        background: #f2f2f2;
+      }
+    }
+  }
+`;
+
+export const Avatar = styled.img`
+  border-radius: 100%;
+  width: 48px;
+  height: 48px;
+`;
+
+export const UsernameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
 `;
