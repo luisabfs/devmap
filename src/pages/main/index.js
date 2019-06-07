@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import MapGL, { Marker } from "react-map-gl";
 
 import CustomModal from "../../components/Modal";
@@ -61,7 +61,7 @@ class Main extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         <CustomModal
           show={this.state.modalShow}
           onHide={() => this.setState({ modalShow: false })}
@@ -90,9 +90,9 @@ class Main extends Component {
             />
           </Marker>
           {this.props.devs.error && this.notifyError()}
-          <ToastContainer />
+          <ToastContainer key={3} />
         </MapGL>
-      </Fragment>
+      </>
     );
   }
 }
