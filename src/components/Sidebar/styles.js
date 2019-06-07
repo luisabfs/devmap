@@ -36,6 +36,7 @@ export const Wrapper = styled.div`
     li {
       display: flex;
       flex-direction: row;
+      border-radius: 3px;
       margin: 10px;
       padding: 5px;
 

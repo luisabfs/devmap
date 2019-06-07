@@ -7,14 +7,22 @@ export function* addDev(action) {
   try {
     const { data } = yield call(api.get, `/users/${action.payload.user}`);
 
-    const userData = {
-      id: data.id,
-      username: data.login,
-      name: data.name,
-      avatar: data.avatar_url
-    };
+    const isDuplicated = yield select(state =>
+      state.devs.data.find(dev => dev.id === data.id)
+    );
 
-    yield put(DevActions.addDevSuccess(userData));
+    if (isDuplicated) {
+      yield put(DevActions.addDevFailure("Duplicated user!"));
+    } else {
+      const userData = {
+        id: data.id,
+        username: data.login,
+        name: data.name,
+        avatar: data.avatar_url
+      };
+
+      yield put(DevActions.addDevSuccess(userData));
+    }
   } catch (err) {
     yield put(DevActions.addDevFailure("Error adding user"));
   }

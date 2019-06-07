@@ -56,7 +56,7 @@ class Main extends Component {
   };
 
   notifyError = () => {
-    toast.error("Error adding user! :(");
+    toast.error(this.props.devs.error);
   };
 
   render() {
