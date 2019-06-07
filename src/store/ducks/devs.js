@@ -21,6 +21,7 @@ const INITIAL_STATE = {
 export default function devs(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_REQUEST:
+      return { ...state, loading: true };
     case Types.ADD_SUCCESS:
       return {
         ...state,
@@ -29,6 +30,11 @@ export default function devs(state = INITIAL_STATE, action) {
         data: [...state.data, action.payload.data]
       };
     case Types.ADD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error
+      };
     default:
       return state;
   }

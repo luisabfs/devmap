@@ -4,9 +4,16 @@ import MapGL, { Marker } from "react-map-gl";
 import CustomModal from "../../components/Modal";
 import Sidebar from "../../components/Sidebar";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as DevActions } from "../../store/ducks/devs";
+
+import { toast, ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 
-export default class App extends Component {
+class Main extends Component {
   state = {
     modalShow: false,
     viewport: {
@@ -44,6 +51,14 @@ export default class App extends Component {
     this.setState({ modalShow: true });
   };
 
+  notifySuccess = () => {
+    toast.success("Success adding user! :)");
+  };
+
+  notifyError = () => {
+    toast.error("Error adding user! :(");
+  };
+
   render() {
     return (
       <Fragment>
@@ -74,8 +89,21 @@ export default class App extends Component {
               src="https://avatars0.githubusercontent.com/u/21061462?s=400&u=ace292debeb43c5a32c521ef0b0f9a094d9749e3&v=4"
             />
           </Marker>
+          {this.props.devs.error && this.notifyError()}
+          <ToastContainer />
         </MapGL>
       </Fragment>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  devs: state.devs
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(DevActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);
