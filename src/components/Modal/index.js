@@ -46,6 +46,7 @@ class CustomModal extends Component {
               value={this.state.input}
               onChange={e => this.setState({ input: e.target.value })}
               placeholder="Github username"
+              autofocus="autofocus"
             />
             <Button onClick={this.props.onHide} type="submit">
               Add

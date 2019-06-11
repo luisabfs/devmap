@@ -1,6 +1,8 @@
 import { call, put, select } from "redux-saga/effects";
 import api from "../../services/api";
 
+import { toast } from "react-toastify";
+
 import { Creators as DevActions } from "../ducks/devs";
 
 export function* addDev(action) {
@@ -13,6 +15,9 @@ export function* addDev(action) {
 
     if (isDuplicated) {
       yield put(DevActions.addDevFailure("Duplicated user!"));
+      toast.warn("Duplicated user! :/", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     } else {
       const userData = {
         id: data.id,
@@ -23,9 +28,15 @@ export function* addDev(action) {
         lng: action.payload.location.lng
       };
 
-      yield put(DevActions.addDevSuccess(userData, action.payload.location));
+      yield put(DevActions.addDevSuccess(userData));
+      toast.success("Success adding user! :)", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   } catch (err) {
     yield put(DevActions.addDevFailure("Error adding user"));
+    toast.error("Error adding user! :(", {
+      position: toast.POSITION.TOP_RIGHT
+    });
   }
 }

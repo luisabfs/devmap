@@ -13,19 +13,21 @@ export const Wrapper = styled.div`
   flex-direction: column;
   flex: 1;
 
-  background: #fff;
-  width: 300px;
-  height: 300px;
-  margin: 30px;
-  padding: 10px;
+  width: 20%;
+  background: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  left: 2%;
+  top: 3%;
+  height: 92%;
   border-radius: 5px;
+  overflow: auto;
 
-  h1 {
-    width: 100%;
+  p {
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
     text-align: center;
-    font-size: 36px;
-    margin: 12px;
-    border-bottom: 1px solid #ededed;
+    padding: 15px 0;
   }
 
   ul {
@@ -39,9 +41,17 @@ export const Wrapper = styled.div`
       border-radius: 3px;
       margin: 10px;
       padding: 5px;
+      align-content: space-between;
 
       &:hover {
-        background: #f2f2f2;
+        background: #fff;
+      }
+
+      a {
+        color: #333;
+        font-weight: bold;
+        align-self: flex-end;
+        margin-right: 3px;
       }
     }
   }
@@ -56,5 +66,18 @@ export const Avatar = styled.img`
 export const UsernameWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
+`;
+
+export const Button = styled.button`
+  background: transparent;
+  border: 0;
+`;
+
+export const ActionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex: 1;
   margin-left: 10px;
 `;
