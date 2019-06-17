@@ -44,9 +44,11 @@ export default function devs(state = INITIAL_STATE, action) {
       return state;
   }
 }
+
 /*
  * Actions
  */
+
 export const Creators = {
   addDevRequest: (user, location) => ({
     type: Types.ADD_REQUEST,
